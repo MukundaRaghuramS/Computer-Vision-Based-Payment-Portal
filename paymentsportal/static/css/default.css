@@ -1,0 +1,14 @@
+body {
+    background-color: #181818;
+    color: #ffffff;
+}
+
+h2 {
+    color: #dddddd;
+}
+
+button {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+}

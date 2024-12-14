@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <label for="theme">Select Theme:</label>
+    <select name="theme" id="theme">
+        <option value="light" {% if theme == 'light' %}selected{% endif %}>Light</option>
+        <option value="dark" {% if theme == 'dark' %}selected{% endif %}>Dark</option>
+    </select>
+    <button type="submit">Save</button>
+</form>
+
+<div>
+    <label for="themeToggle">Dark Mode:</label>
+    <input type="checkbox" id="themeToggle" {% if theme == 'dark' %}checked{% endif %}>
+</div>
+
+<script>
+    const toggle = document.getElementById('themeToggle');
+
+    toggle.addEventListener('change', function() {
+        const theme = this.checked ? 'dark' : 'light';
+        document.body.className = theme;  // Change body class for CSS styles
+        location.reload();  // Reload to apply changes
+    });
+</script>
+{% endblock %}

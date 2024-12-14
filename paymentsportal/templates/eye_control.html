@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye-Controlled Mouse</title>
+    <style>
+        #webcam {
+            width: 640px;
+            height: 480px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eye-Controlled Mouse Interface</h1>
+    <video id="webcam" autoplay></video>
+    <canvas id="outputCanvas" width="640" height="480"></canvas>
+    
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('outputCanvas');
+        const context = canvas.getContext('2d');
+
+        // Access the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(err => {
+            console.error("Error accessing the webcam: ", err);
+        });
+
+        // Process the webcam feed for facial landmarks
+        video.addEventListener('play', () => {
+            // Here you can integrate the MediaPipe library in JS or similar for eye tracking
+            // Example for demo purposes:
+            setInterval(() => {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                // Implement eye tracking or face gesture recognition here
+                // Move mouse based on eye movement using pyautogui (via server data if needed)
+            }, 100);
+        });
+    </script>
+</body>
+</html>
